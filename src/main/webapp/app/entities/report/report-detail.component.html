@@ -1,0 +1,55 @@
+
+<div *ngIf="report">
+    <h2><span jhiTranslate="reportgatewayApp.report.detail.title">Report</span> {{report.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <button type="submit"
+            (click)="generateReport()"
+            class="btn btn-info">
+        <span> Generate Report</span>
+    </button>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="reportgatewayApp.report.name">Name</span></dt>
+        <dd>
+            <span>{{report.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.report.reporttemplatename">Reporttemplatename</span></dt>
+        <dd>
+            <span>{{report.reporttemplatename}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.report.reportoutputtypecode">Reportoutputtypecode</span></dt>
+        <dd>
+            <span>{{report.reportoutputtypecode}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.report.status">Status</span></dt>
+        <dd>
+            <span>{{report.status}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.report.lastmodifiedby">Lastmodifiedby</span></dt>
+        <dd>
+            <span>{{report.lastmodifiedby}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.report.lastmodifieddatetime">Lastmodifieddatetime</span></dt>
+        <dd>
+            <span>{{report.lastmodifieddatetime | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.report.domain">Domain</span></dt>
+        <dd>
+            <span>{{report.domain}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'report/'+ report.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

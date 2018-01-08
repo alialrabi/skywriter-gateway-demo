@@ -1,0 +1,72 @@
+
+<div *ngIf="reportparameter">
+    <h2><span jhiTranslate="reportgatewayApp.reportparameter.detail.title">Reportparameter</span> {{reportparameter.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="reportgatewayApp.reportparameter.label">Label</span></dt>
+        <dd>
+            <span>{{reportparameter.label}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportparameter.instructions">Instructions</span></dt>
+        <dd>
+            <span>{{reportparameter.instructions}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportparameter.datatype">Datatype</span></dt>
+        <dd>
+            <span>{{reportparameter.datatype}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportparameter.required">Required</span></dt>
+        <dd>
+            <span>{{reportparameter.required}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportparameter.minlength">Minlength</span></dt>
+        <dd>
+            <span>{{reportparameter.minlength}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportparameter.maxlength">Maxlength</span></dt>
+        <dd>
+            <span>{{reportparameter.maxlength}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportparameter.validation">Validation</span></dt>
+        <dd>
+            <span>{{reportparameter.validation}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportparameter.status">Status</span></dt>
+        <dd>
+            <span>{{reportparameter.status}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportparameter.lastmodifiedby">Lastmodifiedby</span></dt>
+        <dd>
+            <span>{{reportparameter.lastmodifiedby}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportparameter.lastmodifieddatetime">Lastmodifieddatetime</span></dt>
+        <dd>
+            <span>{{reportparameter.lastmodifieddatetime | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportparameter.domain">Domain</span></dt>
+        <dd>
+            <span>{{reportparameter.domain}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportparameter.report">Report</span></dt>
+        <dd>
+            <div *ngIf="reportparameter.reportId">
+                <a [routerLink]="['/report', reportparameter.reportId]">{{reportparameter.reportId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'reportparameter/'+ reportparameter.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

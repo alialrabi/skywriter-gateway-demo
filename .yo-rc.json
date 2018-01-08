@@ -2,7 +2,8 @@
   "generator-jhipster": {
     "promptValues": {
       "packageName": "com.skywriter.gateway",
-      "nativeLanguage": "en"
+      "nativeLanguage": "en",
+      "microservicePath": "/home/ali/eclipse-workspace/skywriter-report"
     },
     "jhipsterVersion": "4.12.0",
     "baseName": "reportgateway",
