@@ -55,7 +55,7 @@
 
 <ng-template #uploadmodal let-c="close" let-d="dismiss" size="lg">
   <div class="modal-header">
-    <h4 class="modal-title">Upload Files To  Amazon S3</h4>
+    <h4 class="modal-title">Generate Reports</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -70,7 +70,7 @@
            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
        </button>
        <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary" (click)="generateReport();c('Cross click')">
-           <span>Save Report</span>
+           <span>Generate Report</span>
        </button>     
   </div>
 </ng-template>
@@ -79,7 +79,7 @@
 
 <ng-template #parametermodal let-c="close" let-d="dismiss" size="lg">
   <div class="modal-header">
-    <h4 class="modal-title">Upload Files To  Amazon S3</h4>
+    <h4 class="modal-title">Generate Reports</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -96,7 +96,7 @@
            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
        </button>
        <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary" (click)="generateReportWithParam();d('Cross click')">
-           <span>Save Report</span>
+           <span>Generate Report</span>
        </button>     
   </div>
 </ng-template>
