@@ -63,6 +63,7 @@
 			<label class="form-control-label"
 				jhiTranslate="reportgatewayApp.report.jrxmlfile"
 				for="field_jrxmlfile">Jrxmlfile</label>
+
 			<div>
 				<div *ngIf="report.jrxmlfile" class="form-text text-danger clearfix">
 					<a class="pull-left"
@@ -76,16 +77,26 @@
 						<span class="fa fa-times"></span>
 					</button>
 				</div>
-				<input type="file" id="file_jrxmlfile"
-					(change)="setFileData($event, report, 'jrxmlfile', false)"
-					jhiTranslate="entity.action.addblob" />
+
+				<div class="container">
+					<input class="drag" type="file" id="file_jrxmlfile"
+						(change)="setFileData($event, report, 'jrxmlfile', false)"
+						jhiTranslate="entity.action.addblob" />
+				</div>
+				<div class="dragp">
+					<p>Or Drag your file here.</p>
+				</div>
 			</div>
+
 			<input type="hidden" class="form-control" name="jrxmlfile"
 				id="field_jrxmlfile" [(ngModel)]="report.jrxmlfile" /> <input
 				type="hidden" class="form-control" name="jrxmlfileContentType"
 				id="field_jrxmlfileContentType"
 				[(ngModel)]="report.jrxmlfileContentType" />
 		</div>
+
+
+
 		<div class="form-group">
 			<label class="form-control-label"
 				jhiTranslate="reportgatewayApp.report.reportclass"
