@@ -1,41 +1,61 @@
-
 <div *ngIf="report">
     <h2><span jhiTranslate="reportgatewayApp.report.detail.title">Report</span> {{report.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
-      <button (click)="open(uploadmodal)" class="btn btn-info">
+    <button (click)="open(uploadmodal)" class="btn btn-success">
         <span> Generate Report</span>
-    </button>
+    </button> 
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="reportgatewayApp.report.name">Name</span></dt>
+        <dt><span>Name</span></dt>
         <dd>
             <span>{{report.name}}</span>
         </dd>
-        <dt><span jhiTranslate="reportgatewayApp.report.reporttemplatename">Reporttemplatename</span></dt>
+        <dt><span>Reporttemplatename</span></dt>
         <dd>
             <span>{{report.reporttemplatename}}</span>
         </dd>
-        <dt><span jhiTranslate="reportgatewayApp.report.reportoutputtypecode">Reportoutputtypecode</span></dt>
+        <dt><span>Reportoutputtypecode</span></dt>
         <dd>
             <span>{{report.reportoutputtypecode}}</span>
         </dd>
-        <dt><span jhiTranslate="reportgatewayApp.report.status">Status</span></dt>
+        <dt><span>Status</span></dt>
         <dd>
             <span>{{report.status}}</span>
         </dd>
-        <dt><span jhiTranslate="reportgatewayApp.report.lastmodifiedby">Lastmodifiedby</span></dt>
+        <dt><span>Lastmodifiedby</span></dt>
         <dd>
             <span>{{report.lastmodifiedby}}</span>
         </dd>
-        <dt><span jhiTranslate="reportgatewayApp.report.lastmodifieddatetime">Lastmodifieddatetime</span></dt>
+        <dt><span>Lastmodifieddatetime</span></dt>
         <dd>
             <span>{{report.lastmodifieddatetime | date:'medium'}}</span>
         </dd>
-        <dt><span jhiTranslate="reportgatewayApp.report.domain">Domain</span></dt>
+        <dt><span>Domain</span></dt>
         <dd>
             <span>{{report.domain}}</span>
         </dd>
-    </dl>
+    </dl> 
+    
+    
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
+             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+             <th jhiSortBy="label"><span jhiTranslate="reportgatewayApp.reportparameter.label">Label</span> <span class="fa fa-sort"></span></th>
+             <th jhiSortBy="datatype"><span jhiTranslate="reportgatewayApp.reportparameter.datatype">Datatype</span> <span class="fa fa-sort"></span></th>
+             <th jhiSortBy="required"><span>IsRequired</span> <span class="fa fa-sort"></span></th>
+            </tr>
+           </thead>
+           <tbody>
+            <tr *ngFor="let reportparameter of reportparameters ;trackBy: trackId">
+                <td><a [routerLink]="['../reportparameter', reportparameter.id ]">{{reportparameter.id}}</a></td>
+                <td>{{reportparameter.label}}</td>
+                <td>{{reportparameter.datatype}}</td>
+                <td> <input [(ngModel)]="reportparameter.required" (change)="setRole()" type="checkbox" name="required" class="onoffswitch-checkbox" id="required" checked>  </td>                
+            </tr>
+            </tbody>
+        </table>
 
     <button type="submit"
             (click)="previousState()"
@@ -63,13 +83,11 @@
   <div class="modal-body">
          <label>What do you want to do with {{report.reporttemplatename}}</label>
   </div>
-  
-  
   <div class="modal-footer">
        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="d('Cross click')">
            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
        </button>
-       <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary" (click)="generateReport();c('Cross click')">
+       <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary" (click)="createReport();c('Cross click')">
            <span>Generate Report</span>
        </button>     
   </div>

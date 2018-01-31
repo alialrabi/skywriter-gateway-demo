@@ -1,0 +1,52 @@
+
+<div *ngIf="reportjob">
+    <h2><span jhiTranslate="reportgatewayApp.reportjob.detail.title">Reportjob</span> {{reportjob.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="reportgatewayApp.reportjob.name">Name</span></dt>
+        <dd>
+            <span>{{reportjob.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportjob.description">Description</span></dt>
+        <dd>
+            <span>{{reportjob.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportjob.status">Status</span></dt>
+        <dd>
+            <span>{{reportjob.status}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportjob.lastmodiefiedby">Lastmodiefiedby</span></dt>
+        <dd>
+            <span>{{reportjob.lastmodiefiedby}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportjob.lastmodiefieddatetime">Lastmodiefieddatetime</span></dt>
+        <dd>
+            <span>{{reportjob.lastmodiefieddatetime | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportjob.domain">Domain</span></dt>
+        <dd>
+            <span>{{reportjob.domain}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportjob.reportouput">Reportouput</span></dt>
+        <dd>
+            <div *ngIf="reportjob.reportouputId">
+                <a [routerLink]="['/reportouput', reportjob.reportouputId]">{{reportjob.reportouputName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'reportjob/'+ reportjob.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

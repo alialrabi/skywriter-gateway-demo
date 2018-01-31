@@ -1,0 +1,32 @@
+{
+    "reportgatewayApp": {
+        "reportjob" : {
+            "home": {
+                "title": "Reportjobs",
+                "createLabel": "Create a new Reportjob",
+                "createOrEditLabel": "Create or edit a Reportjob",
+                "search": "Search for Reportjob"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Reportjob {{ id }}?"
+            },
+            "detail": {
+                "title": "Reportjob"
+            },
+            "name": "Name",
+            "description": "Description",
+            "status": "Status",
+            "lastmodiefiedby": "Lastmodiefiedby",
+            "lastmodiefieddatetime": "Lastmodiefieddatetime",
+            "domain": "Domain",
+            "reportouput": "Reportouput"
+        }
+    },
+    "reportApp": {
+        "reportjob" : {
+            "created": "A new Reportjob is created with identifier {{ param }}",
+            "updated": "A Reportjob is updated with identifier {{ param }}",
+            "deleted": "A Reportjob is deleted with identifier {{ param }}"
+        }
+    }
+}

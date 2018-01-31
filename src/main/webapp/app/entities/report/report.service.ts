@@ -14,6 +14,9 @@ export class ReportService {
     private resourceSearchUrl = '/report/api/_search/reports';
     private parameterListUrl = 'report/api/parameterList';
     private generateReportUrl = 'report/api/generateReport';
+    private scheduleReportUrl = 'report/api/schedule';
+    private reportparametersUrl = 'report/api/getreportparameters';
+    
 
     constructor(private http: Http, private dateUtils: JhiDateUtils) { }
 
@@ -40,6 +43,21 @@ export class ReportService {
         });
     }
 
+    reportparameters(reportId: number): Observable<Response> {
+        return this.http.get(`${this.reportparametersUrl}/${reportId}`);
+    }
+    
+     parameterList(reportId: number): Observable<Response> {
+        return this.http.get(`${this.parameterListUrl}/${reportId}`);
+    }
+
+    generateReport(reportId: number, parameters: any): Observable<Response> {
+        return this.http.get(`${this.generateReportUrl}/${reportId}/${parameters}`);
+    }
+    
+    schedulereports(reportId: number, parameters: any): Observable<Response> {
+        return this.http.get(`${this.scheduleReportUrl}/${reportId}/${parameters}`);
+    }
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
@@ -54,14 +72,6 @@ export class ReportService {
         const options = createRequestOption(req);
         return this.http.get(this.resourceSearchUrl, options)
             .map((res: any) => this.convertResponse(res));
-    }
-
-    parameterList(reportId: number): Observable<Response> {
-        return this.http.get(`${this.parameterListUrl}/${reportId}`);
-    }
-
-    generateReport(reportId: number, parameters: any): Observable<Response> {
-        return this.http.get(`${this.generateReportUrl}/${reportId}/${parameters}`);
     }
 
     private convertResponse(res: Response): ResponseWrapper {

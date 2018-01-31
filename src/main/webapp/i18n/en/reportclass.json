@@ -1,0 +1,9 @@
+{
+    "reportgatewayApp": {
+        "Reportclass" : {
+            "null": "",
+            "online": "online",
+            "schedule": "schedule"
+        }
+    }
+}
