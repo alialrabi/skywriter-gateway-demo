@@ -1,0 +1,57 @@
+
+<div *ngIf="reportouput">
+    <h2><span jhiTranslate="reportgatewayApp.reportouput.detail.title">Reportouput</span> {{reportouput.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="reportgatewayApp.reportouput.name">Name</span></dt>
+        <dd>
+            <span>{{reportouput.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportouput.reporttemplatename">Reporttemplatename</span></dt>
+        <dd>
+            <span>{{reportouput.reporttemplatename}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportouput.reportoutputtypecode">Reportoutputtypecode</span></dt>
+        <dd>
+            <span>{{reportouput.reportoutputtypecode}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportouput.status">Status</span></dt>
+        <dd>
+            <span>{{reportouput.status}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportouput.lastmodifiedby">Lastmodifiedby</span></dt>
+        <dd>
+            <span>{{reportouput.lastmodifiedby}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportouput.lastmodifieddatetime">Lastmodifieddatetime</span></dt>
+        <dd>
+            <span>{{reportouput.lastmodifieddatetime | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportouput.domain">Domain</span></dt>
+        <dd>
+            <span>{{reportouput.domain}}</span>
+        </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportouput.reportfile">Reportfile</span></dt>
+        <dd>
+            <div *ngIf="reportouput.reportfile">
+                <a (click)="openFile(reportouput.reportfileContentType, reportouput.reportfile)" jhiTranslate="entity.action.open">open</a>
+                {{reportouput.reportfileContentType}}, {{byteSize(reportouput.reportfile)}}
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'reportouput/'+ reportouput.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

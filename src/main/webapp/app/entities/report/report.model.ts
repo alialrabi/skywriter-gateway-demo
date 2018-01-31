@@ -1,5 +1,10 @@
 import { BaseEntity } from './../../shared';
 
+export const enum Reportclass {
+    'online',
+    'schedule'
+}
+
 export class Report implements BaseEntity {
     constructor(
         public id?: number,
@@ -10,7 +15,14 @@ export class Report implements BaseEntity {
         public lastmodifiedby?: string,
         public lastmodifieddatetime?: any,
         public domain?: string,
+        public reportfileContentType?: string,
+        public reportfile?: any,
+        public jrxmlfileContentType?: string,
+        public jrxmlfile?: any,
+        public reportclass?: Reportclass,
         public reportparameters?: BaseEntity[],
+        public reportjobId?: number,
+        public bucket?: BaseEntity[],
     ) {
     }
 }

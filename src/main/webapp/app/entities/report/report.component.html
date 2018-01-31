@@ -35,8 +35,13 @@
             <th jhiSortBy="reportoutputtypecode"><span jhiTranslate="reportgatewayApp.report.reportoutputtypecode">Reportoutputtypecode</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="status"><span jhiTranslate="reportgatewayApp.report.status">Status</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="lastmodifiedby"><span jhiTranslate="reportgatewayApp.report.lastmodifiedby">Lastmodifiedby</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="bucket"><span jhiTranslate="reportgatewayApp.report.bucket">Bucket</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="lastmodifieddatetime"><span jhiTranslate="reportgatewayApp.report.lastmodifieddatetime">Lastmodifieddatetime</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="domain"><span jhiTranslate="reportgatewayApp.report.domain">Domain</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="reportfile"><span jhiTranslate="reportgatewayApp.report.reportfile">Reportfile</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="jrxmlfile"><span jhiTranslate="reportgatewayApp.report.jrxmlfile">Jrxmlfile</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="reportclass"><span jhiTranslate="reportgatewayApp.report.reportclass">Reportclass</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="reportbucket"><span jhiTranslate="reportgatewayApp.report.bucket">Bucket</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -48,8 +53,23 @@
                 <td>{{report.reportoutputtypecode}}</td>
                 <td>{{report.status}}</td>
                 <td>{{report.lastmodifiedby}}</td>
+                <td>{{report.bucket}}</td>
                 <td>{{report.lastmodifieddatetime | date:'medium'}}</td>
                 <td>{{report.domain}}</td>
+                <td>
+                    <a *ngIf="report.reportfile" (click)="openFile(report.reportfileContentType, report.reportfile)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="report.reportfile">{{report.reportfileContentType}}, {{byteSize(report.reportfile)}}</span>
+                </td>
+                <td>
+                    <a *ngIf="report.jrxmlfile" (click)="openFile(report.jrxmlfileContentType, report.jrxmlfile)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="report.jrxmlfile">{{report.jrxmlfileContentType}}, {{byteSize(report.jrxmlfile)}}</span>
+                </td>
+                <td jhiTranslate="{{'reportgatewayApp.Reportclass.' + report.reportclass}}">{{report.reportclass}}</td>
+                <td>
+                    <div *ngIf="report.bucketId">
+                        <a [routerLink]="['../bucket', report.bucketId  ]" >{{report.bucketId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

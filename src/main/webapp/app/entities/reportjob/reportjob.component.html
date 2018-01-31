@@ -1,0 +1,95 @@
+<div>
+    <h2>
+        <span jhiTranslate="reportgatewayApp.reportjob.home.title">Reportjobs</span>
+        <button class="btn btn-primary float-right jh-create-entity create-reportjob" [routerLink]="['/', { outlets: { popup: ['reportjob-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="reportgatewayApp.reportjob.home.createLabel">
+            Create new Reportjob
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'reportgatewayApp.reportjob.home.search' | translate }}">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="reportjobs">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="reportgatewayApp.reportjob.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="description"><span jhiTranslate="reportgatewayApp.reportjob.description">Description</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="status"><span jhiTranslate="reportgatewayApp.reportjob.status">Status</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lastmodiefiedby"><span jhiTranslate="reportgatewayApp.reportjob.lastmodiefiedby">Lastmodiefiedby</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lastmodiefieddatetime"><span jhiTranslate="reportgatewayApp.reportjob.lastmodiefieddatetime">Lastmodiefieddatetime</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="domain"><span jhiTranslate="reportgatewayApp.reportjob.domain">Domain</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="reportouputName"><span jhiTranslate="reportgatewayApp.reportjob.reportouput">Reportouput</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let reportjob of reportjobs ;trackBy: trackId">
+                <td><a [routerLink]="['../reportjob', reportjob.id ]">{{reportjob.id}}</a></td>
+                <td>{{reportjob.name}}</td>
+                <td>{{reportjob.description}}</td>
+                <td>{{reportjob.status}}</td>
+                <td>{{reportjob.lastmodiefiedby}}</td>
+                <td>{{reportjob.lastmodiefieddatetime | date:'medium'}}</td>
+                <td>{{reportjob.domain}}</td>
+                <td>
+                    <div *ngIf="reportjob.reportouputId">
+                        <a [routerLink]="['../reportouput', reportjob.reportouputId  ]" >{{reportjob.reportouputName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../reportjob', reportjob.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'reportjob/'+ reportjob.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'reportjob/'+ reportjob.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <div *ngIf="reportjobs && reportjobs.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+</div>

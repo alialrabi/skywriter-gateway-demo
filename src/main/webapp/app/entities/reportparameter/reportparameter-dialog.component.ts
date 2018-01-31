@@ -12,6 +12,8 @@ import { ReportparameterService } from './reportparameter.service';
 import { Report, ReportService } from '../report';
 import { ResponseWrapper } from '../../shared';
 
+import { Account, LoginModalService, Principal } from '../../shared';
+
 @Component({
     selector: 'jhi-reportparameter-dialog',
     templateUrl: './reportparameter-dialog.component.html'
@@ -20,7 +22,7 @@ export class ReportparameterDialogComponent implements OnInit {
 
     reportparameter: Reportparameter;
     isSaving: boolean;
-
+	account: Account;
     reports: Report[];
 
     constructor(
@@ -28,11 +30,16 @@ export class ReportparameterDialogComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private reportparameterService: ReportparameterService,
         private reportService: ReportService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private principal: Principal
     ) {
     }
 
     ngOnInit() {
+    	this.principal.identity().then((account) => {
+    	 this.account = account ;
+    	});
+    	
         this.isSaving = false;
         this.reportService.query()
             .subscribe((res: ResponseWrapper) => { this.reports = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
@@ -48,6 +55,7 @@ export class ReportparameterDialogComponent implements OnInit {
             this.subscribeToSaveResponse(
                 this.reportparameterService.update(this.reportparameter));
         } else {
+        	this.reportparameter.lastmodifiedby = this.account.login
             this.subscribeToSaveResponse(
                 this.reportparameterService.create(this.reportparameter));
         }

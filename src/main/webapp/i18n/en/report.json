@@ -18,9 +18,15 @@
             "reportoutputtypecode": "Reportoutputtypecode",
             "status": "Status",
             "lastmodifiedby": "Lastmodifiedby",
+            "bucket": "Bucket",
             "lastmodifieddatetime": "Lastmodifieddatetime",
             "domain": "Domain",
-            "reportparameter": "Reportparameter"
+            "reportfile": "Reportfile",
+            "jrxmlfile": "Jrxmlfile",
+            "reportclass": "Reportclass",
+            "reportparameter": "Reportparameter",
+            "reportjob": "Reportjob",
+            "buckets": "Buckets"
         }
     },
     "reportApp": {

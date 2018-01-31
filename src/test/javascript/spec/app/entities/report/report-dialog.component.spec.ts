@@ -8,6 +8,7 @@ import { ReportgatewayTestModule } from '../../../test.module';
 import { ReportDialogComponent } from '../../../../../../main/webapp/app/entities/report/report-dialog.component';
 import { ReportService } from '../../../../../../main/webapp/app/entities/report/report.service';
 import { Report } from '../../../../../../main/webapp/app/entities/report/report.model';
+import { ReportjobService } from '../../../../../../main/webapp/app/entities/reportjob';
 
 describe('Component Tests', () => {
 
@@ -23,6 +24,7 @@ describe('Component Tests', () => {
                 imports: [ReportgatewayTestModule],
                 declarations: [ReportDialogComponent],
                 providers: [
+                    ReportjobService,
                     ReportService
                 ]
             })
