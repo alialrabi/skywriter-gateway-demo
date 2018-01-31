@@ -12,6 +12,8 @@ import { ReportService } from './report.service';
 import { Bucket, BucketService } from '../bucket';
 import { ResponseWrapper } from '../../shared';
 
+import { Account, LoginModalService, Principal } from '../../shared';
+
 @Component({
     selector: 'jhi-report-dialog',
     templateUrl: './report-dialog.component.html'
@@ -20,7 +22,7 @@ export class ReportDialogComponent implements OnInit {
 
     report: Report;
     isSaving: boolean;
-
+	account: Account;
     buckets: Bucket[];
 
     constructor(
@@ -29,11 +31,17 @@ export class ReportDialogComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private reportService: ReportService,
         private bucketService: BucketService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private principal: Principal
     ) {
     }
 
     ngOnInit() {
+    	
+    	this.principal.identity().then((account) => {
+    	 this.account = account ;
+    	});
+    
         this.isSaving = false;
         this.bucketService.query()
             .subscribe((res: ResponseWrapper) => { this.buckets = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
@@ -63,6 +71,7 @@ export class ReportDialogComponent implements OnInit {
             this.subscribeToSaveResponse(
                 this.reportService.update(this.report));
         } else {
+        	this.report.lastmodifiedby = this.account.login ;
             this.subscribeToSaveResponse(
                 this.reportService.create(this.report));
         }

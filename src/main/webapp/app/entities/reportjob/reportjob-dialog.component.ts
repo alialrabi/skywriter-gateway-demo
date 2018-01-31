@@ -12,6 +12,8 @@ import { ReportjobService } from './reportjob.service';
 import { Reportouput, ReportouputService } from '../reportouput';
 import { ResponseWrapper } from '../../shared';
 
+import { Account, LoginModalService, Principal } from '../../shared';
+
 @Component({
     selector: 'jhi-reportjob-dialog',
     templateUrl: './reportjob-dialog.component.html'
@@ -20,7 +22,7 @@ export class ReportjobDialogComponent implements OnInit {
 
     reportjob: Reportjob;
     isSaving: boolean;
-
+	account: Account;
     reportouputs: Reportouput[];
 
     constructor(
@@ -28,11 +30,17 @@ export class ReportjobDialogComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private reportjobService: ReportjobService,
         private reportouputService: ReportouputService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private principal: Principal
     ) {
     }
 
     ngOnInit() {
+    	
+    	this.principal.identity().then((account) => {
+    	 this.account = account ;
+    	});
+    
         this.isSaving = false;
         this.reportouputService
             .query({filter: 'reportjob-is-null'})
@@ -59,6 +67,7 @@ export class ReportjobDialogComponent implements OnInit {
             this.subscribeToSaveResponse(
                 this.reportjobService.update(this.reportjob));
         } else {
+        	this.reportjob.lastmodiefiedby = this.account.login ;
             this.subscribeToSaveResponse(
                 this.reportjobService.create(this.reportjob));
         }

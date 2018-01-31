@@ -1,98 +1,103 @@
-<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+<form name="editForm" role="form" novalidate (ngSubmit)="save()"
+	#editForm="ngForm">
 
-    <div class="modal-header">
-        <h4 class="modal-title" id="myReportouputLabel" jhiTranslate="reportgatewayApp.reportouput.home.createOrEditLabel">Create or edit a Reportouput</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                (click)="clear()">&times;</button>
-    </div>
-    <div class="modal-body">
-        <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" [hidden]="!reportouput.id">
-            <label for="id" jhiTranslate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                   [(ngModel)]="reportouput.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reportgatewayApp.reportouput.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                [(ngModel)]="reportouput.name" required/>
-            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reportgatewayApp.reportouput.reporttemplatename" for="field_reporttemplatename">Reporttemplatename</label>
-            <input type="text" class="form-control" name="reporttemplatename" id="field_reporttemplatename"
-                [(ngModel)]="reportouput.reporttemplatename" required/>
-            <div [hidden]="!(editForm.controls.reporttemplatename?.dirty && editForm.controls.reporttemplatename?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.reporttemplatename?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reportgatewayApp.reportouput.reportoutputtypecode" for="field_reportoutputtypecode">Reportoutputtypecode</label>
-            <input type="text" class="form-control" name="reportoutputtypecode" id="field_reportoutputtypecode"
-                [(ngModel)]="reportouput.reportoutputtypecode" required/>
-            <div [hidden]="!(editForm.controls.reportoutputtypecode?.dirty && editForm.controls.reportoutputtypecode?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.reportoutputtypecode?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reportgatewayApp.reportouput.status" for="field_status">Status</label>
-            <input type="text" class="form-control" name="status" id="field_status"
-                [(ngModel)]="reportouput.status" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reportgatewayApp.reportouput.lastmodifiedby" for="field_lastmodifiedby">Lastmodifiedby</label>
-            <input type="text" class="form-control" name="lastmodifiedby" id="field_lastmodifiedby"
-                [(ngModel)]="reportouput.lastmodifiedby" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reportgatewayApp.reportouput.lastmodifieddatetime" for="field_lastmodifieddatetime">Lastmodifieddatetime</label>
-            <div class="d-flex">
-                <input id="field_lastmodifieddatetime" type="datetime-local" class="form-control" name="lastmodifieddatetime" [(ngModel)]="reportouput.lastmodifieddatetime"
-                />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reportgatewayApp.reportouput.domain" for="field_domain">Domain</label>
-            <input type="text" class="form-control" name="domain" id="field_domain"
-                [(ngModel)]="reportouput.domain" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="reportgatewayApp.reportouput.reportfile" for="field_reportfile">Reportfile</label>
-            <div>
-                <div *ngIf="reportouput.reportfile" class="form-text text-danger clearfix">
-                    <a class="pull-left" (click)="openFile(reportouput.reportfileContentType, reportouput.reportfile)" jhiTranslate="entity.action.open">open</a><br>
-                    <span class="pull-left">{{reportouput.reportfileContentType}}, {{byteSize(reportouput.reportfile)}}</span>
-                    <button type="button" (click)="reportouput.reportfile=null;reportouput.reportfileContentType=null;"
-                            class="btn btn-secondary btn-xs pull-right">
-                        <span class="fa fa-times"></span>
-                    </button>
-                </div>
-                <input type="file" id="file_reportfile" (change)="setFileData($event, reportouput, 'reportfile', false)" jhiTranslate="entity.action.addblob"/>
-            </div>
-            <input type="hidden" class="form-control" name="reportfile" id="field_reportfile"
-                [(ngModel)]="reportouput.reportfile" />
-            <input type="hidden" class="form-control" name="reportfileContentType" id="field_reportfileContentType"
-                [(ngModel)]="reportouput.reportfileContentType" />
-        </div>
+	<div class="modal-header">
+		<h4 class="modal-title" id="myReportouputLabel"
+			jhiTranslate="reportgatewayApp.reportouput.home.createOrEditLabel">Create
+			or edit a Reportouput</h4>
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true" (click)="clear()">&times;</button>
+	</div>
+	<div class="modal-body">
+		<jhi-alert-error></jhi-alert-error>
+		<div class="form-group" [hidden]="!reportouput.id">
+			<label for="id" jhiTranslate="global.field.id">ID</label> <input
+				type="text" class="form-control" id="id" name="id"
+				[(ngModel)]="reportouput.id" readonly />
+		</div>
+		<div class="form-group">
+			<label class="form-control-label"
+				jhiTranslate="reportgatewayApp.reportouput.name" for="field_name">Name</label>
+			<input type="text" class="form-control" name="name" id="field_name"
+				[(ngModel)]="reportouput.name" required />
+			<div
+				[hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+				<small class="form-text text-danger"
+					[hidden]="!editForm.controls.name?.errors?.required"
+					jhiTranslate="entity.validation.required"> This field is
+					required. </small>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="form-control-label"
+				jhiTranslate="reportgatewayApp.reportouput.reporttemplatename"
+				for="field_reporttemplatename">Reporttemplatename</label> <input
+				type="text" class="form-control" name="reporttemplatename"
+				id="field_reporttemplatename"
+				[(ngModel)]="reportouput.reporttemplatename" required />
+			<div
+				[hidden]="!(editForm.controls.reporttemplatename?.dirty && editForm.controls.reporttemplatename?.invalid)">
+				<small class="form-text text-danger"
+					[hidden]="!editForm.controls.reporttemplatename?.errors?.required"
+					jhiTranslate="entity.validation.required"> This field is
+					required. </small>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="form-control-label"
+				jhiTranslate="reportgatewayApp.reportouput.reportoutputtypecode"
+				for="field_reportoutputtypecode">Reportoutputtypecode</label> <input
+				type="text" class="form-control" name="reportoutputtypecode"
+				id="field_reportoutputtypecode"
+				[(ngModel)]="reportouput.reportoutputtypecode" required />
+			<div
+				[hidden]="!(editForm.controls.reportoutputtypecode?.dirty && editForm.controls.reportoutputtypecode?.invalid)">
+				<small class="form-text text-danger"
+					[hidden]="!editForm.controls.reportoutputtypecode?.errors?.required"
+					jhiTranslate="entity.validation.required"> This field is
+					required. </small>
+			</div>
+		</div>
+ 		<div class="form-group">
+			<label class="form-control-label"
+				jhiTranslate="reportgatewayApp.reportouput.reportfile"
+				for="field_reportfile">Reportfile</label>
+			<div>
+				<div *ngIf="reportouput.reportfile"
+					class="form-text text-danger clearfix">
+					<a class="pull-left"
+						(click)="openFile(reportouput.reportfileContentType, reportouput.reportfile)"
+						jhiTranslate="entity.action.open">open</a><br> <span
+						class="pull-left">{{reportouput.reportfileContentType}},
+						{{byteSize(reportouput.reportfile)}}</span>
+					<button type="button"
+						(click)="reportouput.reportfile=null;reportouput.reportfileContentType=null;"
+						class="btn btn-secondary btn-xs pull-right">
+						<span class="fa fa-times"></span>
+					</button>
+				</div>
+				<input type="file" id="file_reportfile"
+					(change)="setFileData($event, reportouput, 'reportfile', false)"
+					jhiTranslate="entity.action.addblob" />
+			</div>
+			<input type="hidden" class="form-control" name="reportfile"
+				id="field_reportfile" [(ngModel)]="reportouput.reportfile" /> <input
+				type="hidden" class="form-control" name="reportfileContentType"
+				id="field_reportfileContentType"
+				[(ngModel)]="reportouput.reportfileContentType" />
+		</div>
 
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
-            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-        </button>
-    </div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" data-dismiss="modal"
+			(click)="clear()">
+			<span class="fa fa-ban"></span>&nbsp;<span
+				jhiTranslate="entity.action.cancel">Cancel</span>
+		</button>
+		<button type="submit" [disabled]="editForm.form.invalid || isSaving"
+			class="btn btn-primary">
+			<span class="fa fa-save"></span>&nbsp;<span
+				jhiTranslate="entity.action.save">Save</span>
+		</button>
+	</div>
 </form>
