@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Response } from '@angular/http';
+import { Response, Http, ResponseContentType } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -10,9 +10,11 @@ import { Reportjob } from './reportjob.model';
 import { ReportjobPopupService } from './reportjob-popup.service';
 import { ReportjobService } from './reportjob.service';
 import { Reportouput, ReportouputService } from '../reportouput';
+import { Report, ReportService } from '../report';
 import { ResponseWrapper } from '../../shared';
 
-import { Account, LoginModalService, Principal } from '../../shared';
+import * as $ from "jquery";
+import { saveAs } from 'file-saver';
 
 @Component({
     selector: 'jhi-reportjob-dialog',
@@ -22,25 +24,36 @@ export class ReportjobDialogComponent implements OnInit {
 
     reportjob: Reportjob;
     isSaving: boolean;
-	account: Account;
+
     reportouputs: Reportouput[];
+
+    reports: Report[];
+
+    reportparameters: any;
+    
+    report: Report;
+    
+    parameters: any;
+    
+    closeResult: string;
+
+    @ViewChild('parametermodal') el:ElementRef;
+  
+    reportId: number;
+
 
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private reportjobService: ReportjobService,
         private reportouputService: ReportouputService,
+        private reportService: ReportService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private  http: Http,
     ) {
     }
 
     ngOnInit() {
-    	
-    	this.principal.identity().then((account) => {
-    	 this.account = account ;
-    	});
-    
         this.isSaving = false;
         this.reportouputService
             .query({filter: 'reportjob-is-null'})
@@ -55,6 +68,8 @@ export class ReportjobDialogComponent implements OnInit {
                         }, (subRes: ResponseWrapper) => this.onError(subRes.json));
                 }
             }, (res: ResponseWrapper) => this.onError(res.json));
+        this.reportService.query()
+            .subscribe((res: ResponseWrapper) => { this.reports = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -67,7 +82,6 @@ export class ReportjobDialogComponent implements OnInit {
             this.subscribeToSaveResponse(
                 this.reportjobService.update(this.reportjob));
         } else {
-        	this.reportjob.lastmodiefiedby = this.account.login ;
             this.subscribeToSaveResponse(
                 this.reportjobService.create(this.reportjob));
         }
@@ -95,6 +109,34 @@ export class ReportjobDialogComponent implements OnInit {
     trackReportouputById(index: number, item: Reportouput) {
         return item.id;
     }
+
+    trackReportById(index: number, item: Report) {
+        return item.id;
+    }
+  
+    getparameters(id){
+        console.log(id)
+       this.reportId = id;
+       this.reportService.reportparameters(id).subscribe((parameters: Response) => {
+             this.reportparameters=parameters.json();
+             console.log(parameters.json());
+        });
+    }
+  
+     testReport(){
+           this.reportService.parameterList(this.reportId).subscribe((parameters: Response) => {
+
+          if ( parameters.json().length <= 0 ){
+
+            var jsonString = JSON.stringify(parameters.json());                        
+                         let formData = new FormData();
+        this.reportService.schedulereports(this.reportId,jsonString).subscribe((res: Response) => {
+           console.log("Done");
+        });
+        }
+        });
+        }
+
 }
 
 @Component({
