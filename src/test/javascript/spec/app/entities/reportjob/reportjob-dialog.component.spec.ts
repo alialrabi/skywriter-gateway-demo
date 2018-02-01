@@ -9,6 +9,7 @@ import { ReportjobDialogComponent } from '../../../../../../main/webapp/app/enti
 import { ReportjobService } from '../../../../../../main/webapp/app/entities/reportjob/reportjob.service';
 import { Reportjob } from '../../../../../../main/webapp/app/entities/reportjob/reportjob.model';
 import { ReportouputService } from '../../../../../../main/webapp/app/entities/reportouput';
+import { ReportService } from '../../../../../../main/webapp/app/entities/report';
 
 describe('Component Tests', () => {
 
@@ -25,6 +26,7 @@ describe('Component Tests', () => {
                 declarations: [ReportjobDialogComponent],
                 providers: [
                     ReportouputService,
+                    ReportService,
                     ReportjobService
                 ]
             })
