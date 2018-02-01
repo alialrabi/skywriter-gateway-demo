@@ -33,7 +33,7 @@
 				jhiTranslate="reportgatewayApp.bucket.folderpath"
 				for="field_folderpath">Folderpath</label> <input type="text"
 				class="form-control" name="folderpath" id="field_folderpath"
-				[(ngModel)]="bucket.folderpath" required pattern="^(/)[a-zA-Z0-9]*$" />
+				[(ngModel)]="bucket.folderpath" required pattern="^(/)[a-zA-Z0-9-/]*$" />
 			<div
 				[hidden]="!(editForm.controls.folderpath?.dirty && editForm.controls.folderpath?.invalid)">
 				<small class="form-text text-danger"
@@ -42,7 +42,7 @@
 					required. </small> <small class="form-text text-danger"
 					[hidden]="!editForm.controls.folderpath?.errors?.pattern"
 					jhiTranslate="entity.validation.pattern"
-					translateValues="{ pattern: '/home' }"> Not Match. </small>
+					translateValues="{ pattern: '(/)[a-zA-Z0-9-/] with no space' }"> Not Match. </small>
 			</div>
 		</div>
 		<table class="table table-striped">

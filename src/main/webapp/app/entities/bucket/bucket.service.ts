@@ -10,6 +10,7 @@ export class BucketService {
 
     private resourceUrl = '/report/api/buckets';
     private resourceSearchUrl = '/report/api/_search/buckets';
+  private resourceReporUrl = '/#/report';
 
     constructor(private http: Http) { }
 

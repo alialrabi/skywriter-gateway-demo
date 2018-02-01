@@ -100,16 +100,20 @@
 		<div class="form-group">
 			<label class="form-control-label"
 				jhiTranslate="reportgatewayApp.report.reportclass"
-				for="field_reportclass">Reportclass</label> <select
-				class="form-control" name="reportclass"
-				[(ngModel)]="report.reportclass" id="field_reportclass">
-				<option value="online">{{'reportgatewayApp.Reportclass.online'
-					| translate}}</option>
-				<option value="schedule">{{'reportgatewayApp.Reportclass.schedule'
-					| translate}}</option>
-			</select>
+				for="field_reportclass">Reportclass</label> 
+				<select class="form-control" 
+						name="reportclass"
+						[(ngModel)]="report.reportclass" 
+						id="field_reportclass">
+					<option value="online">
+						{{'reportgatewayApp.Reportclass.online'| translate}}
+					</option>
+					<option value="schedule">
+						{{'reportgatewayApp.Reportclass.schedule'| translate}}
+					</option>
+				</select>
 		</div>
-		<div class="form-group">
+		<div *ngIf="report.reportclass === 'schedule' " class="form-group">
 			<label class="form-control-label"
 				jhiTranslate="reportgatewayApp.report.bucket" for="field_bucket">bucket</label>
 			<select class="form-control" id="field_bucket" name="bucket"
