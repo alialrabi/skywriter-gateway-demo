@@ -1,120 +1,170 @@
 <div *ngIf="report">
-    <h2><span jhiTranslate="reportgatewayApp.report.detail.title">Report</span> {{report.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <button (click)="open(uploadmodal)" class="btn btn-success">
-        <span> Generate Report</span>
-    </button> 
-    <dl class="row-md jh-entity-details">
-        <dt><span>Name</span></dt>
-        <dd>
-            <span>{{report.name}}</span>
-        </dd>
-        <dt><span>Reporttemplatename</span></dt>
-        <dd>
-            <span>{{report.reporttemplatename}}</span>
-        </dd>
-        <dt><span>Reportoutputtypecode</span></dt>
-        <dd>
-            <span>{{report.reportoutputtypecode}}</span>
-        </dd>
-        <dt><span>Status</span></dt>
-        <dd>
-            <span>{{report.status}}</span>
-        </dd>
-        <dt><span>Lastmodifiedby</span></dt>
-        <dd>
-            <span>{{report.lastmodifiedby}}</span>
-        </dd>
-        <dt><span>Lastmodifieddatetime</span></dt>
-        <dd>
-            <span>{{report.lastmodifieddatetime | date:'medium'}}</span>
-        </dd>
-        <dt><span>Domain</span></dt>
-        <dd>
-            <span>{{report.domain}}</span>
-        </dd>
-    </dl> 
-    
-    
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
-             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-             <th jhiSortBy="label"><span jhiTranslate="reportgatewayApp.reportparameter.label">Label</span> <span class="fa fa-sort"></span></th>
-             <th jhiSortBy="datatype"><span jhiTranslate="reportgatewayApp.reportparameter.datatype">Datatype</span> <span class="fa fa-sort"></span></th>
-             <th jhiSortBy="required"><span>IsRequired</span> <span class="fa fa-sort"></span></th>
-            </tr>
-           </thead>
-           <tbody>
-            <tr *ngFor="let reportparameter of reportparameters ;trackBy: trackId">
-                <td><a [routerLink]="['../reportparameter', reportparameter.id ]">{{reportparameter.id}}</a></td>
-                <td>{{reportparameter.label}}</td>
-                <td>{{reportparameter.datatype}}</td>
-                <td> <input [(ngModel)]="reportparameter.required" (change)="setRole()" type="checkbox" name="required" class="onoffswitch-checkbox" id="required" checked>  </td>                
-            </tr>
-            </tbody>
-        </table>
+	<h2>
+		<span jhiTranslate="reportgatewayApp.report.detail.title">Report</span>
+		{{report.id}}
+	</h2>
+	<hr>
+	<jhi-alert-error></jhi-alert-error>
+	<button (click)="open(uploadmodal)" class="btn btn-success">
+		<span> Generate Report</span>
+	</button>
+	<dl class="row-md jh-entity-details">
+		<dt>
+			<span>Name</span>
+		</dt>
+		<dd>
+			<span>{{report.name}}</span>
+		</dd>
+		<dt>
+			<span>Reporttemplatename</span>
+		</dt>
+		<dd>
+			<span>{{report.reporttemplatename}}</span>
+		</dd>
+		<dt>
+			<span>Reportoutputtypecode</span>
+		</dt>
+		<dd>
+			<span>{{report.reportoutputtypecode}}</span>
+		</dd>
+		<dt>
+			<span>Status</span>
+		</dt>
+		<dd>
+			<span>{{report.status}}</span>
+		</dd>
+		<dt>
+			<span>Lastmodifiedby</span>
+		</dt>
+		<dd>
+			<span>{{report.lastmodifiedby}}</span>
+		</dd>
+		<dt>
+			<span>Lastmodifieddatetime</span>
+		</dt>
+		<dd>
+			<span>{{report.lastmodifieddatetime | date:'medium'}}</span>
+		</dd>
+		<dt>
+			<span>Domain</span>
+		</dt>
+		<dd>
+			<span>{{report.domain}}</span>
+		</dd>
 
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
+		<dt>
+			<span>Report Class</span>
+		</dt>
+		<dd>
+			<span>{{report.reportclass}}</span>
+		</dd>
 
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'report/'+ report.id + '/edit'} }]"
-            replaceUrl="true"
-            queryParamsHandling="merge"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
-</div>
+		<dt>
+			<span>Bucket</span>
+		</dt>
+		<dd>
+			<span>{{report.bucket}}</span>
+		</dd>
+
+	</dl>
 
 
-<ng-template #uploadmodal let-c="close" let-d="dismiss" size="lg">
-  <div class="modal-header">
-    <h4 class="modal-title">Generate Reports</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-         <label>What do you want to do with {{report.reporttemplatename}}</label>
-  </div>
-  <div class="modal-footer">
-       <button type="button" class="btn btn-default" data-dismiss="modal" (click)="d('Cross click')">
-           <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
-       </button>
-       <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary" (click)="createReport();c('Cross click')">
-           <span>Generate Report</span>
-       </button>     
-  </div>
-</ng-template>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
+					<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
+						<span class="fa fa-sort"></span></th>
+					<th jhiSortBy="label"><span
+						jhiTranslate="reportgatewayApp.reportparameter.label">Label</span>
+						<span class="fa fa-sort"></span></th>
+					<th jhiSortBy="datatype"><span
+						jhiTranslate="reportgatewayApp.reportparameter.datatype">Datatype</span>
+						<span class="fa fa-sort"></span></th>
+					<th jhiSortBy="required"><span>IsRequired</span> <span
+						class="fa fa-sort"></span></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr
+					*ngFor="let reportparameter of reportparameters ;trackBy: trackId">
+					<td><a
+						[routerLink]="['../reportparameter', reportparameter.id ]">{{reportparameter.id}}</a></td>
+					<td>{{reportparameter.label}}</td>
+					<td>{{reportparameter.datatype}}</td>
+					<td><input [(ngModel)]="reportparameter.required"
+						(change)="setRole()" type="checkbox" name="required"
+						class="onoffswitch-checkbox" id="required" checked></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<button type="submit" (click)="previousState()" class="btn btn-info">
+			<span class="fa fa-arrow-left"></span>&nbsp;<span
+				jhiTranslate="entity.action.back"> Back</span>
+		</button>
+
+		<button type="button"
+			[routerLink]="['/', { outlets: { popup: 'report/'+ report.id + '/edit'} }]"
+			replaceUrl="true" queryParamsHandling="merge" class="btn btn-primary">
+			<span class="fa fa-pencil"></span>&nbsp;<span
+				jhiTranslate="entity.action.edit"> Edit</span>
+		</button>
+	</div>
+
+
+	<ng-template #uploadmodal let-c="close" let-d="dismiss" size="lg">
+	<div class="modal-header">
+		<h4 class="modal-title">Generate Reports</h4>
+		<button type="button" class="close" aria-label="Close"
+			(click)="d('Cross click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<label>What do you want to do with
+			{{report.reporttemplatename}}</label>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal"
+			(click)="d('Cross click')">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+				translate="entity.action.cancel">Cancel</span>
+		</button>
+		<button type="submit" ng-disabled="editForm.$invalid"
+			class="btn btn-primary" (click)="createReport();c('Cross click')">
+			<span>Generate Report</span>
+		</button>
+	</div>
+	</ng-template>
 
 
 
-<ng-template #parametermodal let-c="close" let-d="dismiss" size="lg">
-  <div class="modal-header">
-    <h4 class="modal-title">Generate Reports</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-           <div class="form-group" *ngFor="let param of parameters">
-                           <label>{{param.key}}</label>
-                           <input type="text" class="form-control" name="email"  [(ngModel)]="param.value" required>
-                           <p class="help-block" ng-show=""></p>
-           </div>
-  </div>  
-  <div class="modal-footer">
-       <button type="button" class="btn btn-default" data-dismiss="modal" (click)="d('Cross click')">
-           <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
-       </button>
-       <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary" (click)="generateReportWithParam();d('Cross click')">
-           <span>Generate Report</span>
-       </button>     
-  </div>
-</ng-template>
+	<ng-template #parametermodal let-c="close" let-d="dismiss" size="lg">
+	<div class="modal-header">
+		<h4 class="modal-title">Generate Reports</h4>
+		<button type="button" class="close" aria-label="Close"
+			(click)="d('Cross click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<div class="form-group" *ngFor="let param of parameters">
+			<label>{{param.key}}</label> <input type="text" class="form-control"
+				name="email" [(ngModel)]="param.value" required>
+			<p class="help-block" ng-show=""></p>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal"
+			(click)="d('Cross click')">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+				translate="entity.action.cancel">Cancel</span>
+		</button>
+		<button type="submit" ng-disabled="editForm.$invalid"
+			class="btn btn-primary"
+			(click)="generateReportWithParam();d('Cross click')">
+			<span>Generate Report</span>
+		</button>
+	</div>
+	</ng-template>

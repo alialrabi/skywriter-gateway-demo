@@ -1,6 +1,7 @@
 
 <div *ngIf="reportouput">
-    <h2><span jhiTranslate="reportgatewayApp.reportouput.detail.title">Reportouput</span> {{reportouput.id}}</h2>
+    <h2><span jhiTranslate="reportgatewayApp.reportouput.detail.title">Reportouput</span> 
+    {{reportouput.reportjobId}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
@@ -35,7 +36,8 @@
         <dt><span jhiTranslate="reportgatewayApp.reportouput.reportfile">Reportfile</span></dt>
         <dd>
             <div *ngIf="reportouput.reportfile">
-                <a (click)="openFile(reportouput.reportfileContentType, reportouput.reportfile)" jhiTranslate="entity.action.open">open</a>
+                <a (click)="openFile(reportouput.reportfileContentType, reportouput.reportfile)"
+                 jhiTranslate="entity.action.open">open</a>
                 {{reportouput.reportfileContentType}}, {{byteSize(reportouput.reportfile)}}
             </div>
         </dd>
