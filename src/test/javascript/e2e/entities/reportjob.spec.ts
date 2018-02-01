@@ -44,6 +44,7 @@ describe('Reportjob e2e test', () => {
         reportjobDialogPage.setDomainInput('domain');
         expect(reportjobDialogPage.getDomainInput()).toMatch('domain');
         reportjobDialogPage.reportouputSelectLastOption();
+        reportjobDialogPage.reportSelectLastOption();
         reportjobDialogPage.save();
         expect(reportjobDialogPage.getSaveButton().isPresent()).toBeFalsy();
     });
@@ -77,6 +78,7 @@ export class ReportjobDialogPage {
     lastmodiefieddatetimeInput = element(by.css('input#field_lastmodiefieddatetime'));
     domainInput = element(by.css('input#field_domain'));
     reportouputSelect = element(by.css('select#field_reportouput'));
+    reportSelect = element(by.css('select#field_report'));
 
     getModalTitle() {
         return this.modalTitle.getAttribute('jhiTranslate');
@@ -144,6 +146,22 @@ export class ReportjobDialogPage {
 
     getReportouputSelectedOption = function() {
         return this.reportouputSelect.element(by.css('option:checked')).getText();
+    }
+
+    reportSelectLastOption = function() {
+        this.reportSelect.all(by.tagName('option')).last().click();
+    }
+
+    reportSelectOption = function(option) {
+        this.reportSelect.sendKeys(option);
+    }
+
+    getReportSelect = function() {
+        return this.reportSelect;
+    }
+
+    getReportSelectedOption = function() {
+        return this.reportSelect.element(by.css('option:checked')).getText();
     }
 
     save() {

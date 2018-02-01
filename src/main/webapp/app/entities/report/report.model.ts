@@ -13,6 +13,7 @@ export class Report implements BaseEntity {
         public reportoutputtypecode?: string,
         public status?: string,
         public lastmodifiedby?: string,
+        public bucket?: string,
         public lastmodifieddatetime?: any,
         public domain?: string,
         public reportfileContentType?: string,
@@ -22,7 +23,7 @@ export class Report implements BaseEntity {
         public reportclass?: Reportclass,
         public reportparameters?: BaseEntity[],
         public reportjobId?: number,
-        public bucket?: BaseEntity[],
+        public bucketId?: BaseEntity[],
     ) {
     }
 }

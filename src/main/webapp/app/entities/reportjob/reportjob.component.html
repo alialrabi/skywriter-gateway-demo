@@ -37,6 +37,7 @@
             <th jhiSortBy="lastmodiefieddatetime"><span jhiTranslate="reportgatewayApp.reportjob.lastmodiefieddatetime">Lastmodiefieddatetime</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="domain"><span jhiTranslate="reportgatewayApp.reportjob.domain">Domain</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="reportouputName"><span jhiTranslate="reportgatewayApp.reportjob.reportouput">Reportouput</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="reportName"><span jhiTranslate="reportgatewayApp.reportjob.report">Report</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -52,6 +53,11 @@
                 <td>
                     <div *ngIf="reportjob.reportouputId">
                         <a [routerLink]="['../reportouput', reportjob.reportouputId  ]" >{{reportjob.reportouputName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="reportjob.reportId">
+                        <a [routerLink]="['../report', reportjob.reportId  ]" >{{reportjob.reportName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

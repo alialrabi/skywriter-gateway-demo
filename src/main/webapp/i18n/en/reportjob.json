@@ -19,7 +19,8 @@
             "lastmodiefiedby": "Lastmodiefiedby",
             "lastmodiefieddatetime": "Lastmodiefieddatetime",
             "domain": "Domain",
-            "reportouput": "Reportouput"
+            "reportouput": "Reportouput",
+            "report": "Report"
         }
     },
     "reportApp": {

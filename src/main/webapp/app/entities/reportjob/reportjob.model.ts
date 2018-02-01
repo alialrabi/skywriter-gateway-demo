@@ -10,6 +10,7 @@ export class Reportjob implements BaseEntity {
         public lastmodiefieddatetime?: any,
         public domain?: string,
         public reportouputId?: number,
+        public reportId?: number,
     ) {
     }
 }

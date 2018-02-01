@@ -34,6 +34,12 @@
                 <a [routerLink]="['/reportouput', reportjob.reportouputId]">{{reportjob.reportouputName}}</a>
             </div>
         </dd>
+        <dt><span jhiTranslate="reportgatewayApp.reportjob.report">Report</span></dt>
+        <dd>
+            <div *ngIf="reportjob.reportId">
+                <a [routerLink]="['/report', reportjob.reportId]">{{reportjob.reportName}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"
