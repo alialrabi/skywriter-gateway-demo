@@ -40,8 +40,10 @@ export class ReportouputDetailComponent implements OnInit, OnDestroy {
         return this.dataUtils.byteSize(field);
     }
 
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
+    download(contentType, field) {
+        console.log(contentType)
+        console.log(field)
+       // return this.dataUtils.openFile(contentType, field);
     }
     previousState() {
         window.history.back();

@@ -7,6 +7,8 @@ import { Report } from './report.model';
 import { ReportService } from './report.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 
+import { Response } from '@angular/http';
+
 @Component({
     selector: 'jhi-report',
     templateUrl: './report.component.html'
@@ -28,6 +30,7 @@ currentAccount: any;
     predicate: any;
     previousPage: any;
     reverse: any;
+    reportparameters: any;
 
     constructor(
         private reportService: ReportService,
@@ -151,6 +154,15 @@ currentAccount: any;
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
         this.reports = data;
+        console.log(data)
+        for(let i=0;i<data.length;i++){
+            
+            this.reportService.reportparameters(data[i].id).subscribe((parameters: Response) => {
+                  data[i].reportparameters = JSON.parse(parameters["_body"]).length;
+            });
+            
+        }
+         console.log(data)   
     }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);

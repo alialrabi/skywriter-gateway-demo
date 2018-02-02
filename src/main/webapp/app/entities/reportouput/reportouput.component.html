@@ -76,8 +76,7 @@
 					<td>{{reportouput.domain}}</td>
 					<td>
 					<a *ngIf="reportouput.reportfile"
-						(click)="downloadFile(reportouput.reportfile)"
-						jhiTranslate="entity.action.open">open</a>
+						(click)="download(reportouput.reportfileContentType, reportouput.reportfile)">Download</a>
 						<span
 						*ngIf="reportouput.reportfile">{{reportouput.reportfileContentType}},
 							{{byteSize(reportouput.reportfile)}}</span>

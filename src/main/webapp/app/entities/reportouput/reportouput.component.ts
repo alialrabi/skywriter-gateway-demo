@@ -143,6 +143,15 @@ export class ReportouputComponent implements OnInit, OnDestroy {
   openFile(contentType, field) {
     return this.dataUtils.openFile(contentType, field);
   }
+  
+  download(contentType, field) {
+        console.log(contentType)
+        console.log(field)
+        var blob = new Blob([field], {type: 'application/pdf'});
+            saveAs(blob, 'test.pdf');
+       // return this.dataUtils.openFile(contentType, field);
+  }
+  
   registerChangeInReportouputs() {
     this.eventSubscriber = this.eventManager.subscribe('reportouputListModification', (response) => this.loadAll());
   }
@@ -166,11 +175,13 @@ export class ReportouputComponent implements OnInit, OnDestroy {
     this.jhiAlertService.error(error.message, null, null);
   }
 
-  downloadFile(reportfile) {
-
-    var blob = new Blob([reportfile], {type: 'application/pdf'});
-    saveAs(blob, 'test.pdf');
-
+  downloadFile(id) {
+    console.log(id);
+    this.reportouputService.find(id).subscribe((reportouput) => {
+             console.log(reportouput.reportfile)
+            var blob = new Blob([reportouput.reportfile], {type: 'application/pdf'});
+            saveAs(blob, 'test.pdf');
+    });
   }
 
 }

@@ -161,7 +161,7 @@ export class ReportDetailComponent implements OnInit, OnDestroy {
                   var blob = new Blob([res["_body"]], {type: 'application/pdf'});
         	          saveAs(blob, this.report.reporttemplatename+"."+this.report.reportoutputtypecode);
                  }, error => {
-                    this.jhiAlertService.info(" Error in uploading to Amazon S3 Storage ");
+                    this.jhiAlertService.info(" Error ");
            }
         );                        
                                             

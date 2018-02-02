@@ -41,7 +41,8 @@
             <th jhiSortBy="reportfile"><span jhiTranslate="reportgatewayApp.report.reportfile">Reportfile</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="jrxmlfile"><span jhiTranslate="reportgatewayApp.report.jrxmlfile">Jrxmlfile</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="reportclass"><span jhiTranslate="reportgatewayApp.report.reportclass">Reportclass</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="reportjobName"><span jhiTranslate="reportgatewayApp.report.reportjob">Reportjob</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="bucket"><span jhiTranslate="reportgatewayApp.report.bucket">Bucket</span> <span class="fa fa-sort"></span></th>
+            <th>No Of Parameters</th>
             <th></th>
             </tr>
             </thead>
@@ -70,6 +71,7 @@
                         <a [routerLink]="['../bucket', report.bucketId  ]" >{{report.bucketId}}</a>
                     </div>
                 </td>
+                <td>{{ report.reportparameters }}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
